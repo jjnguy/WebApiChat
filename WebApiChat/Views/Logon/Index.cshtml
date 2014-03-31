@@ -4,5 +4,12 @@
 }
 
 <div class="logon-form">
-
+    <form action="@Url.Action("Logon", "Logon")" method="POST">
+        <div class="username-entry">
+            <input type="text" name="Username" />
+        </div>
+        <div class="go-button">
+            <button class="btn btn-primary">login</button>
+        </div>
+    </form>
 </div>

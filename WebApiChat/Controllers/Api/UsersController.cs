@@ -7,17 +7,27 @@ using System.Web.Http;
 using Chat.Data;
 using WebApiChat.Models;
 using Dapper;
+using WebApiChat.Infra;
 
-namespace WebApiChat.Controllers
+namespace WebApiChat.Controllers.Api
 {
-    public class UsersController : ApiController
+    public class UsersController : BaseApiController
     {
-        // GET api/users
+        [Route("users")]
         public List<User> Get()
         {
             return ConnectionHelper.WithNewConnection(con =>
             {
                 return con.Query<User>("SELECT * FROM users").ToList();
+            });
+        }
+
+        [Route("api/users/find/{username}")]
+        public User Get(string username)
+        {
+            return ConnectionHelper.WithNewConnection(con =>
+            {
+                return con.Query<User>("SELECT * FROM users WHERE username = @username", new { username }).SingleOrDefault();
             });
         }
 
@@ -28,6 +38,12 @@ namespace WebApiChat.Controllers
             {
                 return con.Query<User>("SELECT * FROM users WHERE id = @id", new { id }).Single();
             });
+        }
+
+        //[Route()]
+        public User Find(string username)
+        {
+            return ConnectionHelper.WithNewConnection(con => con.Query<User>("SELECT * FROM users WHERE username = @username", new { username })).Single();
         }
 
         // POST api/users

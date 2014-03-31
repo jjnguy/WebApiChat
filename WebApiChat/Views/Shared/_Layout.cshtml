@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="/Content/Site.css" rel="stylesheet" />
-    <link href="/Content/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("Beer & Chat", "Index", "Home", null, new { @class = "navbar-brand" })
+            <div class="row">
+                <div class="navbar-header col-md-4">
+                    @Html.ActionLink("Beer & Chat", "Index", "Home", null, new { @class = "navbar-brand" })
+                </div>
+                <div class="col-md-5">
+                    @if (Sesh.IsLoggedOn)
+                    {
+                        <span>@Sesh.CurrentUser.username</span>
+                    }
+                </div>
             </div>
         </div>
     </div>
@@ -22,6 +29,7 @@
             <p>&copy; @DateTime.Now.Year - Beer & Code</p>
         </footer>
     </div>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1-beta1/jquery.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
     @RenderSection("scripts", required: false)
 </body>

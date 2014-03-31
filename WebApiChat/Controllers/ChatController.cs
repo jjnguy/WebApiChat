@@ -6,13 +6,11 @@ using System.Web.Mvc;
 
 namespace WebApiChat.Controllers
 {
-    public class HomeController : BaseController
+    public class ChatController : Controller
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
             return View();
         }
-    }
+	}
 }

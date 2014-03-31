@@ -4,10 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApiChat.Infra;
 
-namespace WebApiChat.Controllers
+namespace WebApiChat.Controllers.Api
 {
-    public class FriendsController : ApiController
+    public class FriendsController : BaseApiController
     {
         // GET api/<controller>
         public IEnumerable<string> Get()
