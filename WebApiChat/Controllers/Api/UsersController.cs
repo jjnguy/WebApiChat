@@ -13,7 +13,7 @@ namespace WebApiChat.Controllers.Api
 {
     public class UsersController : BaseApiController
     {
-        [Route("users")]
+        [Route("api/users")]
         public List<User> Get()
         {
             return ConnectionHelper.WithNewConnection(con =>

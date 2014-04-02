@@ -25,7 +25,6 @@ var Chat = function (currentUser, chatPartner) {
     self.currentBody = ko.observable('');
 
     self.sendMessage = function () {
-        self.currentBody('');
         $.ajax({
             type: 'post',
             url: '/api/messages',
@@ -37,6 +36,7 @@ var Chat = function (currentUser, chatPartner) {
                 body: self.currentBody()
             })
         });
+        self.currentBody('');
     };
 
     function listenForNewMessages() {
