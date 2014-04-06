@@ -13,26 +13,8 @@ namespace WebApiChat.Controllers.Api
 {
     public class UsersController : BaseApiController
     {
-        [Route("api/users")]
-        public List<User> Get()
-        {
-            return ConnectionHelper.WithNewConnection(con =>
-            {
-                return con.Query<User>("SELECT * FROM users").ToList();
-            });
-        }
-
-        [Route("api/users/find/{username}")]
-        public User Get(string username)
-        {
-            return ConnectionHelper.WithNewConnection(con =>
-            {
-                return con.Query<User>("SELECT * FROM users WHERE username = @username", new { username }).SingleOrDefault();
-            });
-        }
-
-        // GET api/users/5
-        public User Get(int id)
+        [Route("api/users/{id:int}")]
+        public User Get(long id)
         {
             return ConnectionHelper.WithNewConnection(con =>
             {
@@ -40,35 +22,23 @@ namespace WebApiChat.Controllers.Api
             });
         }
 
-        //[Route()]
-        public User Find(string username)
+        [Route("api/users/{username}")]
+        public User Get(string username)
         {
-            return ConnectionHelper.WithNewConnection(con => con.Query<User>("SELECT * FROM users WHERE username = @username", new { username })).Single();
-        }
-
-        // POST api/users
-        public void Post([FromBody]User value)
-        {
-            ConnectionHelper.WithNewConnection(con =>
+            return ConnectionHelper.WithNewConnection(con =>
             {
-                con.Execute("INSERT INTO users (id, username) VALUES (@id, @username)", new { id = value.id, username = value.username });
+                return con.Query<User>("SELECT * FROM users WHERE username = @username", new { username }).Single();
             });
         }
 
-        // PUT api/users/5
-        public void Put(int id, [FromBody]User value)
+        [Route("api/users/find/{username}"), HttpGet]
+        public List<User> Find(string username)
         {
-            if (value.id != id) throw new Exception("Cannot change a user's id");
-            ConnectionHelper.WithNewConnection(con =>
+            return ConnectionHelper.WithNewConnection(con =>
             {
-                con.Execute("UPDATE users SET username = @username WHERE id = @id", value);
+                return con.Query<User>("SELECT * FROM users WHERE username LIKE @username", 
+                    new { username = "%" + username + "%" }).ToList();
             });
-        }
-
-        // DELETE api/users/5
-        public void Delete(int id)
-        {
-            throw new Exception("Cannot delete users yet.");
         }
     }
 }

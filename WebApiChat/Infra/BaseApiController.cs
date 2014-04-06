@@ -6,7 +6,6 @@ using System.Web.Http;
 
 namespace WebApiChat.Infra
 {
-    [RoutePrefix("api")]
     public class BaseApiController : ApiController
     {
     }
