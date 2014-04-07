@@ -15,7 +15,7 @@
     <div ng-repeat="chat in chats">
         <div ng-controller="Chat" ng-init="chatPartner=chat.otherUser">
             <div ng-repeat="message in messages">
-                <div>{{ body }}</div>
+                <div>{{ message.body }}</div>
             </div>
             <textarea ng-model="currentBody"></textarea>
             <button ng-click="sendMessage()">-></button>

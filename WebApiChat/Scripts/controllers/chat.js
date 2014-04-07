@@ -43,13 +43,14 @@ app.controller('Chat', function ($scope, $http, $interval) {
             url: '/api/messages?to=' + $scope.currentUser.id + '&from=' + $scope.chatPartner.id,
         }).success(function (data) {
             $scope.messages = data;
+            $scope.currentBody = data.length;
         });
     }
 
     function listenForNewMessages() {
         $interval(function () {
             refreshData();
-        }, 5000);
+        }, 1000);
     }
     listenForNewMessages();
 });
