@@ -3,25 +3,22 @@
     ViewBag.Title = "Index";
 }
 
-
-<div class="start-new-form">
-    <input type="text" data-bind="value: newChatUser" /><button data-bind="click: openChat">go</button>
-</div>
-
-<div data-bind="foreach: chats">
-    <div data-bind="foreach: messages">
-        <div data-bind="text: body"></div>
-    </div>
-    <textarea data-bind="value: currentBody"></textarea>
-    <button data-bind="click: sendMessage">-></button>
-</div>
-
-@section scripts {
-    <script src="/Scripts/viewmodels/chat.js"></script>
-    <script>
-        ko.applyBindings(new ChatPage({
-            id : '@Sesh.CurrentUser.id',
-            username : '@Sesh.CurrentUser.username'
-        }));
-    </script>
+@section topscripts {
+    <script src="/Scripts/controllers/chat.js"></script>
 }
+
+<div ng-controller="ChatPage">
+    <div class="start-new-form">
+        <input type="text" ng-model="newChatUser" /><button ng-click="openChat()">go</button>
+    </div>
+
+    <div ng-repeat="chat in chats">
+        <div ng-controller="Chat" ng-init="chatPartner=chat.otherUser">
+            <div ng-repeat="message in messages">
+                <div>{{ body }}</div>
+            </div>
+            <textarea ng-model="currentBody"></textarea>
+            <button ng-click="sendMessage()">-></button>
+        </div>
+    </div>
+</div>

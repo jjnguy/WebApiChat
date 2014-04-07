@@ -40,5 +40,19 @@ namespace WebApiChat.Controllers.Api
                     new { username = "%" + username + "%" }).ToList();
             });
         }
+
+        [Route("api/users")]
+        public User Post(string username)
+        {
+            var id = ConnectionHelper.WithNewConnection(con => 
+            {
+                return con.Query<ulong>("INSERT INTO users (username) VALUES (@username); SELECT LAST_INSERT_ID();", new { username }).Single();
+            });
+            return new User
+            {
+                id = (long) id,
+                username = username
+            };
+        }
     }
 }

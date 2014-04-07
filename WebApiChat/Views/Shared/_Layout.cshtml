@@ -1,12 +1,17 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="BeerAndChat">
 <head>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/Scripts/angular.js"></script>
+    <script src="/Scripts/controllers/base.js"></script> 
+    @RenderSection("topscripts", required: false)
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="/Content/Site.css" rel="stylesheet" />
 </head>
-<body>
+<body ng-controller="Base" ng-init="currentUser=@Json.Encode(Sesh.CurrentUser)">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="row">
@@ -29,8 +34,6 @@
             <p>&copy; @DateTime.Now.Year - Beer & Code</p>
         </footer>
     </div>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1-beta1/jquery.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
