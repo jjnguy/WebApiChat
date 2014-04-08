@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -252,6 +253,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Logon\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\Relase.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chat.Data\Chat.Data.csproj">
