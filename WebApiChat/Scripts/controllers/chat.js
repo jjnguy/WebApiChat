@@ -2,7 +2,7 @@
 
     $scope.chats = [];
 
-    $scope.newChatUser = '';
+    $scope.newChatUser = 'not jjnguy';
 
     $scope.openChat = function () {
         $http({
@@ -32,9 +32,16 @@ app.controller('Chat', function ($scope, $http, $interval) {
                 body: $scope.currentBody
             })
         }).success(function (data) {
-            $scope.messages.push(data);
             $scope.currentBody = ''
         });
+    };
+
+    $scope.poll = true;
+    $scope.togglePollChar = function () {
+        return $scope.poll ? 'X' : '0';
+    };
+    $scope.togglePolling = function () {
+        $scope.poll = !$scope.poll;
     };
 
     function refreshData() {
@@ -42,14 +49,17 @@ app.controller('Chat', function ($scope, $http, $interval) {
             method: 'GET',
             url: '/api/messages?to=' + $scope.currentUser.id + '&from=' + $scope.chatPartner.id,
         }).success(function (data) {
-            $scope.messages = data;
-            $scope.currentBody = data.length;
+            if ($scope.messages.length != data.length) {
+                $scope.messages = data;
+            }
         });
     }
 
     function listenForNewMessages() {
         $interval(function () {
-            refreshData();
+            if ($scope.poll) {
+                refreshData();
+            }
         }, 1000);
     }
     listenForNewMessages();

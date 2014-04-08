@@ -24,3 +24,18 @@ app.directive('bcMirror', function () {
         },
     };
 });
+
+app.directive('bcScrollBottom', function () {
+    return {
+        link: function (scope, element, attrs) {
+
+            function ensureElementScrolledToBottom(ele) {
+                ele.scrollTop(element[0].scrollHeight);
+            }
+
+            scope.$watch(attrs.bcScrollBottom, function () {
+                ensureElementScrolledToBottom(element);
+            });
+        },
+    };
+});

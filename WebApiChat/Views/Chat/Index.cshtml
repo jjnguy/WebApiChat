@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
@@ -9,13 +8,19 @@
 
 <div ng-controller="ChatPage">
     <div class="start-new-form">
-        <input type="text" ng-model="newChatUser" /><button ng-click="openChat()">go</button>
+        <div class="col-md-5">Open chat with someone new!</div>
+        <div class="col-md-8"><input type="text" ng-model="newChatUser" placeholder="username" /><button ng-click="openChat()">go</button></div>
     </div>
-
-    <div ng-repeat="chat in chats">
+    <div ng-repeat="chat in chats" class="chat">
         <div ng-controller="Chat" ng-init="chatPartner=chat.otherUser">
-            <div ng-repeat="message in messages">
-                <div>{{ message.body }}</div>
+            <h3>Chat With {{ chatPartner.username }} <a class="btn btn-default toggle-poll" ng-click="togglePolling()">{{ togglePollChar() }}</a></h3>
+            <div class="messages" bc-scroll-bottom="messages">
+                <div ng-repeat="message in messages">
+                    <div class="message">
+                        <div class="body">{{ message.body }}</div>
+                        <div class="timestamp">{{ message.timestamp | date : 'short' }}</div>
+                    </div>
+                </div>
             </div>
             <textarea ng-model="currentBody"></textarea>
             <button ng-click="sendMessage()">-></button>

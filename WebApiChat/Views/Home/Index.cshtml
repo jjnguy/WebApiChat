@@ -6,7 +6,9 @@
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>First you need to log in. Currently you just need to select a username. There are no passwords or authentication.</p>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "Logon")">Log in &raquo;</a></p>
+        @if (!Sesh.IsLoggedOn) { 
+            <p><a class="btn btn-default" href="@Url.Action("Index", "Logon")">Log in &raquo;</a></p>
+        }
     </div>
     <div class="col-md-4">
         <h2>Find riends</h2>

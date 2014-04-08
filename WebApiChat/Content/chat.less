@@ -3,3 +3,30 @@
     .make-row();
 }
 
+.chat {
+    .make-row();
+}
+
+.toggle-poll {
+    padding: 5px;
+    line-height: 7px;
+}
+
+.messages {
+    max-height: 300px;
+    width: 400px;
+    overflow-y: scroll;
+}
+
+.message {
+    .make-row();
+    width: 100%;
+
+    .body {
+        .make-md-column(7);
+    }
+
+    .timestamp {
+        .make-md-column(5);
+    }
+}
